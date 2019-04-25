@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta charset="UTF-8">
+<title>SMART ORDER</title>
+<meta http-equiv="Content-Script-Type" content="text/javascript" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta name="viewport" content="width=device-width,target-densitydpi=medium-dpi, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" >
+<script src="../js/jquery.min.js"></script>
+<script src="../js/jquery.bxslider.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../../dist/css/common.css" />
+<link rel="stylesheet" type="text/css" href="../../dist/css/style.css" />
+</head>
+<body>
+<div class="container sub" id="purchase">
+	<div class="content">
+		<p class="close" onclick="javascript:history.go(-1)"><img src="../../dist/images/content/close_ic.png" alt="닫기" /></p>
+		<div class="cont_box_t"></div>
+		<div class="cont_box">
+			<ul class="top">
+				<li>주문번호 : B51B5B8613</li>
+				<li>주문일시 : 2019년 3월 12일 오후 4시56분</li>
+			</ul>
+			<div class="qr_box">
+				<p class="price">결재 금액 : 5,500원</p>
+				<div class="qr">
+					<!-- 큐알 들어갈 영역 -->
+				</div>
+				<div class="count_down" style="text-align: center">
+					<span id="timer">
+						<span id="time">60</span>초
+					</span>
+				</div>
+				<div class="care_txt"><img src="../../dist/images/content/care_ic.gif" alt="주의 아이콘"/><span>10분 이내로 결재 부탁드립니다.</span></div>
+			</div>
+		</div>
+		<div class="cont_box_b"></div>
+		<p class="bt" onclick="javascript:history.go(-1)">결제 취소</p>
+	</div>
+
+</body>
+</html>
+<script>
+    // 04.16 60secs count down
+   $(function count_down() {
+        var counter = 60;
+        var interval = setInterval(function() {
+            counter--;
+            // Display 'counter' wherever you want to display it.
+            if (counter <= 0) {
+                clearInterval(interval);
+                $('#timer').html("<h3>시간이 만료되었습니다.</h3>");
+                return;
+            }else{
+                $('#time').text(counter);
+                console.log("Timer --> " + counter);
+            }
+        }, 1000);
+    });
+</script>

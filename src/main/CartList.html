@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta charset="UTF-8">
+<title>SMART ORDER</title>
+<meta http-equiv="Content-Script-Type" content="text/javascript" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta name="viewport" content="width=device-width,target-densitydpi=medium-dpi, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" >
+<script src="../js/jquery.min.js"></script>
+<script src="../js/jquery.bxslider.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../../dist/css/common.css" />
+<link rel="stylesheet" type="text/css" href="../../dist/css/style.css" />
+
+</head>
+<body>
+<div class="container sub" id="basket">
+	<div id="header">
+		<h1>장바구니</h1>
+	</div>
+	<div class="content">
+		<div class="basket_num"></div>
+		<div class="menu_list">
+			<!--<ul>-->
+				<!--<li>-->
+					<!--<div class="left" style="overflow:hidden;">-->
+						<!--<p class="menu_img left"><a href="../foodlist/FoodDetail.html"><img src="../../dist/images/content/menu_img.jpg" alt="꼬지어묵우동" /></a></p>-->
+						<!--<div class="txt_info left">-->
+							<!--<strong>꼬지어묵우동</strong>-->
+							<!--<p class="price"><span id="con_price">6,500</span>원</p>-->
+						<!--</div>-->
+					<!--</div>-->
+					<!--<div class="right">-->
+						<!--<p class="cancel" onclick="cancel()">취소</p>-->
+						<!--<div id="input_div">-->
+							<!--<input type="button" id="minus" onclick="minus()">-->
+							<!--<input type="number" size="25" value="1" id="count">-->
+							<!--<input type="button" id="plus" onclick="plus()">-->
+						<!--</div>-->
+					<!--</div>-->
+				<!--</li>-->
+			<!--</ul>-->
+		</div>
+		<div class="bot_fixed">
+			<ul class="quick_bt">
+				 <!--<li class="basket"><img src="../../dist/images/content/basket_ic.png" alt="장바구니" /><span class="quantity">1</span></li>-->
+				<li class="back" onclick="javascript:history.go(-1)"><img src="../../dist/images/content/back_ic.png" alt="뒤로가기" /></li>
+			</ul>
+			<div class="price_total">
+				<strong class="left">총 주문금액</strong>
+				<div class="totalWrap right">
+					<input type="text" value="6500" id="total_count" hidden />
+					<input type="number" value="" id="total_count_view"/>원
+				</div>
+			</div>
+			<ul class="bt_wrap">
+				<li onclick="popupLayer('layer1');">주문하기</li>
+				<li onclick="javascript:history.go(-1)"> 주문취소</li>
+			</ul>
+		</div>
+	</div>
+
+	<!-- 주문하기팝업 -->
+	<div id="layer1" class="dim-layer" style="display:none;">
+		<div class="dimBg"></div>
+		<div class="pop-layer">
+			<div class="pop-head">
+				<strong class="left">주문확인</strong>
+				<p class="btn-layerClose right" ><img src="../../dist/images/content/close_ic.gif" alt="닫기" /></p>
+			</div>
+			<div class="content">
+				<div class="cont">
+					<p>본 내역을 주문하시겠습니까? </p>
+					<p style="color:#777;">(통합 주문시 장바구니 번호를 입력하세요.)</p>
+				</div>
+				<ul class="pop_bt_wrap">
+					<li onclick="javascript:" class="left">개별주문</li>
+					<li onclick="javascript:popupLayer('layer2'), count_down()" class="right">통합주문</li>
+				</ul>
+			</div>
+
+		</div>
+	</div>
+
+	<!-- 통합주문하기팝업 / 통합주문 버튼누르면 나오는팝업-->
+	<div id="layer2" class="dim-layer" style="display:none;">
+		<div class="dimBg"></div>
+		<div class="pop-layer">
+			<div class="pop-head">
+				<strong class="left">통합주문</strong>
+				<p class="btn-layerClose right" ><img src="../../dist/images/content/close_ic.gif" alt="닫기" /></p>
+			</div>
+			<div class="content">
+				<strong>장바구니 번호</strong>
+				<div class="pop_input">
+					<input type="number" size="25" value="" placeholder="장바구니 번호를 입력하세요." class="left">
+					<p class="add right">추가</p>
+				</div>
+				<div class="count_down">
+					<span id="timer">
+						<span id="time">60</span>초
+					</span>
+				</div>
+				<div class="care_txt"><img src="../../dist/images/content/care_ic.gif" alt="주의 아이콘"/><span>요청 확인 후 창이 종료됩니다.</span></div>
+				<ul class="pop_bt_wrap">
+					<li onclick="javascript:" class="left">확인</li>
+					<li onclick="javascript:" class="right cancel_popup"><a href="./CartList.html"> 취소</a></li>
+				</ul>
+				
+			</div>
+	
+		</div>
+	</div>
+
+</body>
+</html>
+
+<script src="../js/common.js"></script>
+<script src="./CartList.js"></script>

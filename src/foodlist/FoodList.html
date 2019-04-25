@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta charset="UTF-8">
+<title>SMART ORDER</title>
+<meta http-equiv="Content-Script-Type" content="text/javascript" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta name="viewport" content="width=device-width,target-densitydpi=medium-dpi, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" >
+
+<script src="../js/jquery.min.js"></script>
+<script src="../js/jquery.bxslider.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../../dist/css/common.css" />
+<link rel="stylesheet" type="text/css" href="../../dist/css/style.css" />
+
+<!-- 슬라이딩 탭메뉴 css -->
+<link rel="stylesheet" href="https://idangero.us/swiper/dist/css/swiper.min.css">
+</head>
+<body>
+<div class="container sub" id="FoodList">
+	<div id="header">
+		<h1>메뉴리스트</h1>
+		<div class="grad_sch">
+			<!--<p><a href="javascript:" class="search_btn">검색</a></p>-->
+			<div class="sch_layer" style="display: none;">   
+				<form method="get" action="/bbs/search.php">
+				<input type="hidden" name="srows" value="10">
+				<input type="hidden" name="sfl" value="wr_subject||wr_content">
+				<input type="hidden" name="sop" value="or">
+					<fieldset>
+						<legend>검색</legend>
+						<input id="keyword" title="" name="stx" value="" placeholder="검색어를 입력하세요." class="left">
+						<button type="submit" class="right">검색</button>
+					</fieldset>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="swiper-container menu_tab">
+		<div class="swiper-wrapper slide_tab">
+			<!--<div class="swiper-slide">우동</div>-->
+			<!--<div class="swiper-slide">돈가스·퓨전</div>-->
+			<!--<div class="swiper-slide" >한식·식사류</div>-->
+			<!--<div class="swiper-slide" >라면·냉면</div>-->
+			<!--<div class="swiper-slide" >분식</div>-->
+			<!--<div class="swiper-slide" >중식</div>-->
+		</div>
+	</div>
+	<div class="content">
+		<div class="swiper-container menu_list">
+			<div class="swiper-wrapper slide_context">
+				<div class="swiper-slide swiper-slide-active">
+					<!--<ul class="listWrap">-->
+						<!--<li>-->
+							<!--<div class="left">-->
+								<!--<p class="menu_img left"><img src="../../dist/images/content/menu_img.jpg" alt="꼬지어묵우동" /></p>-->
+								<!--<div class="txt_info left">-->
+									<!--<strong>꼬지어묵우동</strong>-->
+									<!--<p class="price"><span id="con_price">6,500</span>원</p>-->
+								<!--</div>-->
+							<!--</div>-->
+							<!--<div class="right">-->
+								<!--<div id="input_div">-->
+									<!--<input type="button" id="minus" onclick="minus()">-->
+									<!--<input type="number" size="25" value="1" id="count">-->
+									<!--<input type="button" id="plus" onclick="plus()">-->
+								<!--</div>-->
+							<!--</div>-->
+						<!--</li>-->
+						<!--<li>-->
+							<!--<div class="left">-->
+								<!--<p class="menu_img left"><img src="../../dist/images/content/menu_img.jpg" alt="꼬지어묵우동" /></p>-->
+								<!--<div class="txt_info left">-->
+									<!--<strong>꼬지어묵우동</strong>-->
+									<!--<p class="price"><span id="con_price">6,500</span>원</p>-->
+								<!--</div>-->
+							<!--</div>-->
+							<!--<div class="right">-->
+								<!--<div id="input_div">-->
+									<!--<input type="button" id="minus" onclick="minus()">-->
+									<!--<input type="number" size="25" value="1" id="count">-->
+									<!--<input type="button" id="plus" onclick="plus()">-->
+								<!--</div>-->
+							<!--</div>-->
+						<!--</li>-->
+					<!--</ul>-->
+				</div>
+				<div class="swiper-slide swiper-slide-next" >
+					<!--<ul class="listWrap">-->
+						<!--<li>-->
+							<!--<div class="left">-->
+								<!--<p class="menu_img left"><img src="../../dist/images/content/menu_img.jpg" alt="꼬지어묵우동" /></p>-->
+								<!--<div class="txt_info left">-->
+									<!--<strong>돈가스</strong>-->
+									<!--<p class="price"><span id="con_price">6,500</span>원</p>-->
+								<!--</div>-->
+							<!--</div>-->
+							<!--<div class="right">-->
+								<!--<div id="input_div">-->
+									<!--<input type="button" id="minus" onclick="minus()">-->
+									<!--<input type="number" size="25" value="1" id="count">-->
+									<!--<input type="button" id="plus" onclick="plus()">-->
+								<!--</div>-->
+							<!--</div>-->
+						<!--</li>-->
+					<!--</ul>-->
+				</div>
+				<!--<div class="swiper-slide">-->
+					<!--<ul class="listWrap">-->
+						<!--<li>-->
+							<!--<div class="left">-->
+								<!--<p class="menu_img left"><img src="../../dist/images/content/menu_img.jpg" alt="꼬지어묵우동" /></p>-->
+								<!--<div class="txt_info left">-->
+									<!--<strong>전주비빔밥</strong>-->
+									<!--<p class="price"><span id="con_price">6,500</span>원</p>-->
+								<!--</div>-->
+							<!--</div>-->
+							<!--<div class="right">-->
+								<!--<div id="input_div">-->
+									<!--<input type="button" id="minus" onclick="minus()">-->
+									<!--<input type="number" size="25" value="1" id="count">-->
+									<!--<input type="button" id="plus" onclick="plus()">-->
+								<!--</div>-->
+							<!--</div>-->
+						<!--</li>-->
+					<!--</ul>-->
+				<!--</div>-->
+				<!--<div class="swiper-slide">-->
+					<!--<ul class="listWrap">-->
+						<!--<li>-->
+							<!--<div class="left">-->
+								<!--<p class="menu_img left"><img src="../../dist/images/content/menu_img.jpg" alt="꼬지어묵우동" /></p>-->
+								<!--<div class="txt_info left">-->
+									<!--<strong>새우라면</strong>-->
+									<!--<p class="price"><span id="con_price">6,500</span>원</p>-->
+								<!--</div>-->
+							<!--</div>-->
+							<!--<div class="right">-->
+								<!--<div id="input_div">-->
+									<!--<input type="button" id="minus" onclick="minus()">-->
+									<!--<input type="number" size="25" value="1" id="count">-->
+									<!--<input type="button" id="plus" onclick="plus()">-->
+								<!--</div>-->
+							<!--</div>-->
+						<!--</li>-->
+					<!--</ul>-->
+				<!--</div>-->
+				<!--<div class="swiper-slide">-->
+					<!--<ul class="listWrap">-->
+						<!--<li>-->
+							<!--<div class="left">-->
+								<!--<p class="menu_img left"><img src="../../dist/images/content/menu_img.jpg" alt="꼬지어묵우동" /></p>-->
+								<!--<div class="txt_info left">-->
+									<!--<strong>떡볶이</strong>-->
+									<!--<p class="price"><span id="con_price">6,500</span>원</p>-->
+								<!--</div>-->
+							<!--</div>-->
+							<!--<div class="right">-->
+								<!--<div id="input_div">-->
+									<!--<input type="button" id="minus" onclick="minus()">-->
+									<!--<input type="number" size="25" value="1" id="count">-->
+									<!--<input type="button" id="plus" onclick="plus()">-->
+								<!--</div>-->
+							<!--</div>-->
+						<!--</li>-->
+					<!--</ul>-->
+				<!--</div>-->
+				<!--<div class="swiper-slide">-->
+					<!--<ul class="listWrap">-->
+						<!--<li>-->
+							<!--<div class="left">-->
+								<!--<p class="menu_img left"><img src="../../dist/images/content/menu_img.jpg" alt="꼬지어묵우동" /></p>-->
+								<!--<div class="txt_info left">-->
+									<!--<strong>짜장면</strong>-->
+									<!--<p class="price"><span id="con_price">6,500</span>원</p>-->
+								<!--</div>-->
+							<!--</div>-->
+							<!--<div class="right">-->
+								<!--<div id="input_div">-->
+									<!--<input type="button" id="minus" onclick="minus()">-->
+									<!--<input type="number" size="25" value="1" id="count">-->
+									<!--<input type="button" id="plus" onclick="plus()">-->
+								<!--</div>-->
+							<!--</div>-->
+						<!--</li>-->
+					<!--</ul>-->
+				<!--</div>-->
+			</div>
+		</div>
+	
+	
+		
+		<div class="detail">
+			
+		</div>
+		<div class="bot_fixed">
+			<ul class="quick_bt">
+				<li class="basket"><a href="../main/CartList.html"><img src="../../dist/images/content/basket_ic.png" alt="장바구니" /><span class="quantity"></span></a></li>
+				<li class="back" onclick="javascript:history.go(-1)"><img src="../../dist/images/content/back_ic.png" alt="뒤로가기" /></li>
+			</ul>
+			<div class="price_total">
+				<strong class="left">총 주문금액</strong>
+				<div class="totalWrap right">
+					<input type="text" value="0" id="total_count" hidden />
+					<input type="number" value="0" id="total_count_view"/>원
+				</div>
+			</div>
+			<ul class="bt_wrap">
+				<li onclick="javascript: callBasketSubList()">장바구니 담기</li>
+				<li onclick="javascript:">바로 주문하기</li>
+			</ul>
+		</div>
+	</div>
+</body>
+</html>
+<script src="../js/common.js"></script>
+
+
+<!-- 슬라이딩 탭메뉴 js -->
+<script src="https://idangero.us/swiper/dist/js/swiper.min.js"></script>
+<script src="./FoodList.js"></script>
+<script>
+    //슬라이딩 탭메뉴
+    var galleryThumbs = new Swiper('.menu_tab', {
+        spaceBetween: 10,
+        slidesPerView: 4,
+        freeMode: true,
+        watchSlidesVisibility: true,
+        watchSlidesProgress: true,
+    });
+    var galleryTop = new Swiper('.menu_list', {
+        spaceBetween: 10,
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        thumbs: {
+            swiper: galleryThumbs
+        }
+    });
+
+    //04.10 it send a correct menu tab from main page to food list page.
+    galleryThumbs.slideTo(gotostore_index, false, false);
+    galleryTop.slideTo(gotostore_index, false, false);
+
+    //검색
+    // $( ".search_btn" ).click(function(){
+    //     $( ".sch_layer" ).slideToggle(100)
+    // });
+    //
+    // //04.08 saving session storage(from food detail)
+    // function saveFoodDetail () {
+    //     //1) make object to save food detail
+    //     var orderDetail = [{name:document.getElementById("detail_food_name").value, count: document.getElementById("count").value}];
+    //     //2) save data to Session storage with transfering object to JSON String
+    //     sessionStorage.setItem("orderDetail", JSON.stringify((orderDetail)));
+    //
+    //     console.log(sessionStorage.getItem("orderDetail"));
+    //     location.href="../main/CartList.html"
+    // }
+
+
+
+  </script>
+
