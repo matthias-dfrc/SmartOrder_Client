@@ -9,6 +9,8 @@
 <meta name="viewport" content="width=device-width,target-densitydpi=medium-dpi, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" >
 <script src="../js/jquery.min.js"></script>
 <script src="../js/jquery.bxslider.min.js"></script>
+<script src="../js/jquery-barcode.js"></script>
+	<script type="text/javascript" src="jquery.qrcode.min.js"></script>
 <link rel="stylesheet" type="text/css" href="../../dist/css/common.css" />
 <link rel="stylesheet" type="text/css" href="../../dist/css/style.css" />
 </head>
@@ -24,9 +26,9 @@
 			</ul>
 			<div class="qr_box">
 				<p class="price">결재 금액 : 5,500원</p>
-				<div class="qr">
-					<!-- 큐알 들어갈 영역 -->
-				</div>
+					<div class="qr">
+						<div id="qrcode"></div>
+					</div>
 				<div class="count_down" style="text-align: center">
 					<span id="timer">
 						<span id="time">60</span>초
@@ -44,7 +46,7 @@
 <script>
     // 04.16 60secs count down
    $(function count_down() {
-        var counter = 60;
+        var counter = 600;
         var interval = setInterval(function() {
             counter--;
             // Display 'counter' wherever you want to display it.
@@ -58,4 +60,12 @@
             }
         }, 1000);
     });
+</script>
+
+<script type="text/javascript">
+    $('#qrcode').qrcode("this plugin is great");
+
+
+
+
 </script>

@@ -38,31 +38,42 @@ $( document ).ready(function() {
     })
         .done(function(data) {
             sessionStorage["todayfoodinfo"] = JSON.stringify(data);
-            render_todayfoodinfo(data);
+
+            function compare( a, b ) {
+                if ( a.displayNo < b.displayNo ){
+                    return -1;
+                }
+                if ( a.displayNo > b.displayNo ){
+                    return 1;
+                }
+                return 0;
+            }
+            console.log(data.sort(compare));
+            render_todayfoodinfo(data.sort(compare));
         });
 
     //basketmaster API calling with body request -> basket number
-    $.ajax({
-        url: "http://dev.wifiorder.com/api/basketmaster",
-        type: "POST",
-        contentType: "application/json;charset=utf-8",
-        dataType: 'json',
-        processData:false,
-        data:JSON.stringify({
-            "siteOperatorCode":"00003",
-            "siteCode":"0000000001",
-            "visitorId":"001"
-        }),
-        success: function (results) {
-            sessionStorage["basketmaster"] = JSON.stringify(results);
-            console.log(sessionStorage['basketmaster']);
-        },
-        error: function (err) {
-            alert('basket master api error');
-            console.log(err);
-        }
-    });
-
+    if (isEmpty(sessionStorage['basketmaster']) === true) {
+        $.ajax({
+            url: "http://dev.wifiorder.com/api/basketmaster",
+            type: "POST",
+            contentType: "application/json;charset=utf-8",
+            dataType: 'json',
+            processData:false,
+            data:JSON.stringify({
+                "siteOperatorCode":"00003",
+                "siteCode":"0000000001",
+                "visitorId":"001"
+            }),
+            success: function (results) {
+                sessionStorage["basketmaster"] = JSON.stringify(results);
+            },
+            error: function (err) {
+                alert('basket master api error');
+                console.log(err);
+            }
+        });
+    }
     //render a reststop name
     $(function () {
         var sitemaster = JSON.parse(sessionStorage["sitemaster"]);
@@ -90,10 +101,9 @@ $( document ).ready(function() {
 // render today food info
 
 function render_todayfoodinfo(data) {
-    console.log(data);
     for(var i = 0; i < data.length; i++) {
         var markup = `
-            <div ><a href="../foodlist/FoodDetail.html"><img src="../..`+ data[i].foodPicURL1+`" alt="네트워크가 느립니다 잠시만 기다려주세요" id="`+ data[i].foodCode +`" /></a></div>
+            <div><a href="../foodlist/FoodDetail.html"> <img id="`+data[i].foodCode+`" src="../..`+ data[i].foodPicURL1+`" alt="네트워크가 느립니다 잠시만 기다려주세요" id="`+ data[i].foodCode +`" /></a></div>
         `;
         document.querySelector('div.slider').insertAdjacentHTML('beforeend', markup);
     }
@@ -121,19 +131,29 @@ $('div.menu').on('click', function (e) {
 });
 
 // 04.24 save todayfoodinfo id into session storage to open fooddetail page
-$('div.visual').on('click', function (e) {
+$('div.slider').on('click', function (e) {
     console.log(e.target.id);
     var event = e.target.id;
+
+    var todayFoodInfo = JSON.parse(sessionStorage['todayfoodinfo']);
     //1) save the menu in an array
     var gotoFoodDetail = [];
     gotoFoodDetail[0] = event;
 
     //2) save the object in session storage
-    sessionStorage["foodDetail"] = JSON.stringify(gotoFoodDetail);
+    sessionStorage["foodDetailCode"] = JSON.stringify(gotoFoodDetail);
     // sessionStorage.setItem("menu_key", JSON.stringify(gotomenu));
 });
 
 
+//04.26 chekcing sessionStorage is empty
+function isEmpty(obj) {
+    for(var key in obj) {
+        if(obj.hasOwnProperty(key))
+            return false;
+    }
+    return true;
+}
 
 // //04.08 saving session storage(from food detail)
 // function saveFoodDetail () {

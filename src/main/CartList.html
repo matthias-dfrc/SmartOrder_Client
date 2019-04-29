@@ -54,7 +54,7 @@
 				</div>
 			</div>
 			<ul class="bt_wrap">
-				<li onclick="popupLayer('layer1');">주문하기</li>
+				<li onclick="orderStatus('layer1')">주문하기</li>
 				<li onclick="javascript:history.go(-1)"> 주문취소</li>
 			</ul>
 		</div>
@@ -74,7 +74,7 @@
 					<p style="color:#777;">(통합 주문시 장바구니 번호를 입력하세요.)</p>
 				</div>
 				<ul class="pop_bt_wrap">
-					<li onclick="javascript:" class="left">개별주문</li>
+					<li onclick="javascript:individualOrder()" class="left">개별주문</li>
 					<li onclick="javascript:popupLayer('layer2'), count_down()" class="right">통합주문</li>
 				</ul>
 			</div>
@@ -111,6 +111,28 @@
 	
 		</div>
 	</div>
+
+    <!-- 통합주문 승인 여부 -->
+    <div id="layer3" class="dim-layer" style="display:none;">
+        <div class="dimBg"></div>
+        <div class="pop-layer">
+            <div class="pop-head">
+                <strong class="left">주문확인</strong>
+                <p class="btn-layerClose right" ><img src="../../dist/images/content/close_ic.gif" alt="닫기" /></p>
+            </div>
+            <div class="content">
+                <div class="cont">
+                    <p>본 내역을 승인하시겠습니까? </p>
+                </div>
+                <ul class="pop_bt_wrap">
+                    <li onclick="javascript:" class="left">승인</li>
+                    <li onclick="javascript:" class="right">거부</li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
 
 </body>
 </html>

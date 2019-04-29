@@ -77,7 +77,7 @@ function renderFoodList() {
                        <ul class="listWrap">
                            <li>
                                <div class="left">
-                                   <p class="menu_img left"><a href="./FoodDetail.html"><img src="../../dist/images/content/menu_img.jpg" alt="` + foodinfo[j][k].foodName + `" id="` + foodinfo[j][k].foodName + `"/></a></p>
+                                   <p class="menu_img left"><a href="./FoodDetail.html"><img id="`+ foodinfo[j][k].foodCode+`" src="../../dist/images/content/menu_img.jpg" alt="` + foodinfo[j][k].foodName + `" id="` + foodinfo[j][k].foodName + `"/></a></p>
                                    <div class="txt_info left">
                                        <strong>` + foodinfo[j][k].foodName + `</strong>
                                        <p class="price"><span id="con_price` + k + `" >${foodinfo[j][k].foodCost}</span>원</p>
@@ -134,7 +134,25 @@ function basketSubList(j,k, className) {
             calc_total_price();
         }
     }
+
 };
+
+// 04.24 save todayfoodinfo id into session storage to open fooddetail page
+$('div.left').on('click', function (e) {
+    console.log(e.target.id);
+    var event = e.target.id;
+
+    //1) save the menu in an array
+    var gotoFoodDetail = [];
+    gotoFoodDetail[0] = event;
+
+    //2) save the object in session storage
+    sessionStorage["foodDetailCode"] = JSON.stringify(gotoFoodDetail);
+    // sessionStorage.setItem("menu_key", JSON.stringify(gotomenu));
+
+
+});
+
 
 //04.08 saving session storage(from food detail)
 function callBasketSubList () {
@@ -161,7 +179,6 @@ function callBasketSubList () {
                     processData:false,
                     data:JSON.stringify(dataBasketSubList),
                     success: function (results) {
-                        console.log(results);
                         sessionStorage['foodInfoQuantity'] = JSON.stringify(foodinfo);
                     },
                     error: function (err) {
