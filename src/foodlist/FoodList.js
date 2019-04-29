@@ -201,3 +201,44 @@ function callBasketSubList () {
     }
     $('span.quantity').text(`${total_quantity}`);
 }
+
+function orderImmediately() {
+    //    1) make dataBasketSublist object
+    for (var j = 0; j < foodinfo.length; j++) {
+        for (var k = 0; k < foodinfo[j].length; k++) {
+            // when click a cart btn, call basketsublist and send it
+            var dataBasketSubList = {};
+            dataBasketSubList.siteOperatorCode = foodinfo[j][k].siteOperatorCode;
+            dataBasketSubList.siteCode = foodinfo[j][k].siteCode;
+            dataBasketSubList.basketNo = basketMaster.basketNo;
+            dataBasketSubList.foodCode = foodinfo[j][k].foodCode;
+            dataBasketSubList.foodQuantity = foodinfo[j][k].foodQuantity;
+            dataBasketSubList.foodPrice = foodinfo[j][k].foodCost;
+            dataBasketSubList.storeCode = foodinfo[j][k].storeCode;
+
+            //    2) call basketusblist API when the foodQuantity is over a 0
+            if(dataBasketSubList.foodQuantity > 0) {
+                $.ajax({
+                    url: "http://dev.wifiorder.com/api/basketsublist",
+                    type: "POST",
+                    contentType: "application/json;charset=utf-8",
+                    dataType: 'json',
+                    processData:false,
+                    data:JSON.stringify(dataBasketSubList),
+                    success: function (results) {
+                        sessionStorage['foodInfoQuantity'] = JSON.stringify(foodinfo);
+                    },
+                    error: function (err) {
+                        alert('basket master api error');
+                        console.log(err);
+                    }
+                });
+            }
+
+        }
+    }
+
+    sessionStorage['orderImmediately'] = 'Y';
+    location.replace('../main/CartList.html');
+
+}

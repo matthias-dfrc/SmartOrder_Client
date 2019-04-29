@@ -10,7 +10,7 @@
 <script src="../js/jquery.min.js"></script>
 <script src="../js/jquery.bxslider.min.js"></script>
 <script src="../js/jquery-barcode.js"></script>
-	<script type="text/javascript" src="jquery.qrcode.min.js"></script>
+<script type="text/javascript" src="jquery.qrcode.min.js"></script>
 <link rel="stylesheet" type="text/css" href="../../dist/css/common.css" />
 <link rel="stylesheet" type="text/css" href="../../dist/css/style.css" />
 </head>
@@ -21,24 +21,24 @@
 		<div class="cont_box_t"></div>
 		<div class="cont_box">
 			<ul class="top">
-				<li>주문번호 : B51B5B8613</li>
-				<li>주문일시 : 2019년 3월 12일 오후 4시56분</li>
+				<li id="orderNumber"></li>
+				<li id="orderDate"></li>
 			</ul>
 			<div class="qr_box">
-				<p class="price">결재 금액 : 5,500원</p>
+				<p class="price" id="orderAmount"></p>
 					<div class="qr">
 						<div id="qrcode"></div>
 					</div>
 				<div class="count_down" style="text-align: center">
 					<span id="timer">
-						<span id="time">60</span>초
+						<span id="time">600</span>초
 					</span>
 				</div>
 				<div class="care_txt"><img src="../../dist/images/content/care_ic.gif" alt="주의 아이콘"/><span>10분 이내로 결재 부탁드립니다.</span></div>
 			</div>
 		</div>
 		<div class="cont_box_b"></div>
-		<p class="bt" onclick="javascript:history.go(-1)">결제 취소</p>
+		<p class="bt" onclick="javascript:"><a href="../main/Main.html"> 홈으로 </a></p>
 	</div>
 
 </body>
@@ -62,10 +62,4 @@
     });
 </script>
 
-<script type="text/javascript">
-    $('#qrcode').qrcode("this plugin is great");
-
-
-
-
-</script>
+<script type="text/javascript" src="Purchase.js"></script>

@@ -1,6 +1,9 @@
 //04.26 set global variables
     var basketMaster = JSON.parse(sessionStorage['basketmaster']);
     console.log(basketMaster);
+    if (basketMaster.length === 0) {
+        location.replace('./Main.html');
+    }
     var foodInfoQuantity = JSON.parse(sessionStorage['foodInfoQuantity']);
     console.log(foodInfoQuantity);
 
@@ -220,7 +223,10 @@ function individualOrder () {
         data:JSON.stringify(orderData),
         success: function (results) {
             console.log(results);
-            // location.replace('../purchasing/Purchase');
+            sessionStorage['ordermaster'] = JSON.stringify(results);
+            sessionStorage.removeItem('basketmaster');
+            basketMaster = [];
+            location.replace('../purchasing/Purchase.html');
         },
         error: function (err) {
             alert('ordermaster api error');
@@ -228,3 +234,48 @@ function individualOrder () {
         }
     });
 }
+
+function integratedOrder () {
+    var data = {};
+        data.siteOperatorCode = basketMaster.siteOperatorCode;
+        data.siteCode = basketMaster.siteCode;
+        data.basketNo = basketMaster.basketNo;
+        data.targetBasketNo = $('input.left').val();
+
+    var xmlhttp_merge = new XMLHttpRequest();
+
+    xmlhttp_merge.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log(this.responseText);
+            }
+        }
+
+        xmlhttp_merge.open("PUT", `http://dev.wifiorder.com/api/basketmaster/merge?siteOperatorCode=${data.siteOperatorCode}&siteCode=${data.siteCode}&basketNo=${data.basketNo}&targetBasketNo=${data.targetBasketNo}`);
+        xmlhttp_merge.send();
+
+    // setTimeout(function () {
+    //     $.ajax({
+    //         url: "http://dev.wifiorder.com/api/basketmaster/merge",
+    //         method: "PUT",
+    //         dataType: 'json',
+    //         contentType: 'application/json',
+    //         data: data,
+    //         success: function (results) {
+    //             console.log(results);
+    //             sessionStorage.removeItem('basketmaster');
+    //             basketMaster = [];
+    //             alert('성공적으로 주문이 통합되었습니다');
+    //             location.replace('./Main.html');},
+    //         error: function (err) {
+    //             alert('merge api error');
+    //             console.log(data);
+    //             console.log(err);}
+    //     });
+    // },1000);
+}
+
+$(function () {
+    if(sessionStorage['orderImmediately'] === 'Y') {
+        orderStatus('layer1');
+    }
+});
