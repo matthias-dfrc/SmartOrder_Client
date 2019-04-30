@@ -202,6 +202,7 @@ function callBasketSubList () {
     $('span.quantity').text(`${total_quantity}`);
 }
 
+//04.29 add new function Zorderimmediately
 function orderImmediately() {
     //    1) make dataBasketSublist object
     for (var j = 0; j < foodinfo.length; j++) {

@@ -277,5 +277,6 @@ function integratedOrder () {
 $(function () {
     if(sessionStorage['orderImmediately'] === 'Y') {
         orderStatus('layer1');
+        sessionStorage.removeItem('orderImmediately');
     }
 });

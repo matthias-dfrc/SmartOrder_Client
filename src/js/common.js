@@ -1,30 +1,18 @@
-// 수량 js
-// var count = 1;
-// var countEl = document.getElementById("count");
-// var total_count = document.getElementById("total_count"); //추가
-// var total_count_view = document.getElementById("total_count_view"); //추가
+$(document).ready(function(){
+    // fullmenu
+    $(".menu-open, .bg_full_m").click(function(){
+        if($('.full_menu').is(':animated'))return false;
+        if($('.full_menu').is(':visible')==true){
+            $('.full_menu').animate({ "left": "-400px" }, 500 ,function(){
+                $('.full_menu').hide();
+            });
+            $('.bg_full_m').fadeOut();
+        }else{
+            $('.full_menu').show();
+            $('.full_menu').animate({ "left": "0" }, 500 );
+            $('.bg_full_m').css('height',$(document).height()+'px').fadeIn();
+        }
+    });
 
-// var value;
-// value = $("name").val();
-
-
-// function plus(){
-//   count++;
-//   countEl.value = count;
-//   total_count_view.value = total_count.value * countEl.value; //추가
-//     $("#total_quantity").text(count); //추가 04.02
-//
-// }
-//
-// function minus(){
-//
-//   if (count > 1) {
-// 	count--;
-// 	countEl.value = count;
-//   total_count_view.value = total_count_view.value - total_count.value; //추가
-//       $("#total_quantity").text(count); //추가 04.02;
-//   }
-// }
-
-
+});
 
